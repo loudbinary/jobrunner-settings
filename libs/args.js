@@ -56,6 +56,7 @@ function Args(cliArgs){
             })
         } else {
             console.log('No documents found to seed to mongodb');
+            process.exit(0);
         }
     }
 
@@ -82,6 +83,7 @@ function Args(cliArgs){
             _.each(docs,doc =>{
                 console.log('jobrunner -t',doc.current.target,'-p',doc.current.platform);
             })
+            process.exit(0)
         })
     }
 
