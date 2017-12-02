@@ -5,7 +5,7 @@ const path = require('path');
 const writeJsonFile = require('write-json-file');
 const exec = require('execa');
 let hash = require('object-hash');
-
+const debug = process.env.DEBUG || false;
 function Utils(){
 
     function clear(dir){
