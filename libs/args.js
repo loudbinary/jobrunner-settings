@@ -33,6 +33,7 @@ function Args(cliArgs){
                     });
                     Promise.all(outOfDate).then(()=>{
                        console.log('Push completed');
+                        process.exit(0);
                     });
                 } else {
                     console.log('No build settings need to be pushed, no changed detected!');
@@ -49,8 +50,10 @@ function Args(cliArgs){
         mongo.cleanDb().then(()=>{
             mongo.writeDb(settings).then(()=>{
                 console.log('Seeding completed', settings.length, 'inserted into Mongodb');
+                process.exit(0);
             })
         })
+
     }
 
     function clone(){
@@ -58,13 +61,15 @@ function Args(cliArgs){
         mongo.read((err,docs)=>{
             utils.localdb.write(jobrunnerDirectory,docs)
             console.log('Clone completed');
+            process.exit(0);
         });
 
     }
 
     function clean(){
         mongo.cleanDb().then(()=>{
-            console.log('Mongodb database has been cleaned, all records deleted!');;
+            console.log('Mongodb database has been cleaned, all records deleted!');
+            process.exit(0);
         })
 
     }
@@ -127,6 +132,7 @@ function Args(cliArgs){
                 });
                 console.log('');
                 console.log(`${invalid.length} build settings.json were invalid`);
+                process.exit(0);
             })
 
         })
