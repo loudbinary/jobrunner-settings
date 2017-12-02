@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+
+let Jrs = require('./../libs/jobrunner-settings');
+let jrs = new Jrs();
+
+//jrs.args.parse('--help');
+
+jrs.initialize(()=>{
+    start();
+})
+
+function start(){
+    jrs.args.parse(process.argv);
+}
+
+
