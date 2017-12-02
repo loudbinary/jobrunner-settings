@@ -47,13 +47,16 @@ function Args(cliArgs){
     function seed(){
         if (debug) console.log('Queuing push...');
         let settings = utils.localdb.getAllSettings(jobrunnerDirectory);
-        mongo.cleanDb().then(()=>{
-            mongo.writeDb(settings).then(()=>{
-                console.log('Seeding completed', settings.length, 'inserted into Mongodb');
-                process.exit(0);
+        if (settings.length > 0){
+            mongo.cleanDb().then(()=>{
+                mongo.writeDb(settings).then(()=>{
+                    console.log('Seeding completed', settings.length, 'inserted into Mongodb');
+                    process.exit(0);
+                })
             })
-        })
-
+        } else {
+            console.log('No documents found to seed to mongodb');
+        }
     }
 
     function clone(){
@@ -152,7 +155,7 @@ function Args(cliArgs){
     if (_.isNil(instance)){
         this.parse = function(cliArgs){
             args
-                .option('folder', 'Location to save build settings',jobrunnerDirectory, jobrunnerDirectory,assignJobrunnerDirectory)
+                .option('folder', 'Location to save build settings',jobrunnerDirectory,assignJobrunnerDirectory)
                 .option('debug', 'Prints out helpful information and other details',false,debugAssign)
                 .option('collection', 'Specify Mongodb collection name for storing build settings','builds',collectionAssign)
                 .command('refresh', 'Refreshes your local build settings folder with changes from database',refresh)
