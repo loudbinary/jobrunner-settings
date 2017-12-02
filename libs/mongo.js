@@ -73,7 +73,6 @@ function Mongodb(){
         instance.writeDb = function(settings){
             return new Promise((resolve,reject)=>{
                 let collection = instance.db.collection(process.env.JRS_COLLECTION);
-                collection.drop();
                 collection.insertMany(settings,(err)=>{
                     if (err) reject(err);
                     console.log(settings.length,'documents inserted');
@@ -85,8 +84,17 @@ function Mongodb(){
         instance.cleanDb = function(){
             return new Promise((resolve)=>{
                 let collection = instance.db.collection(process.env.JRS_COLLECTION);
-                collection.drop();
-                resolve(null);
+                collection.find({}).toArray((err,docs)=>{
+                    if (err) throw new Error(err);
+                    if (docs.length >0){
+                        collection.drop();
+                        resolve(null);
+                    } else {
+                        resolve(null)
+                    }   
+                });
+                
+                
             })
 
         }

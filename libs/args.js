@@ -46,8 +46,10 @@ function Args(cliArgs){
     function seed(){
         if (debug) console.log('Queuing push...');
         let settings = utils.localdb.getAllSettings(jobrunnerDirectory);
-        mongo.writeDb(settings).then(()=>{
-            console.log('Seeding completed', settings.length, 'inserted into Mongodb');
+        mongo.cleanDb().then(()=>{
+            mongo.writeDb(settings).then(()=>{
+                console.log('Seeding completed', settings.length, 'inserted into Mongodb');
+            })
         })
     }
 
