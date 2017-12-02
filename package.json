@@ -1,6 +1,6 @@
 {
   "name": "jobrunner-settings",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Manage jobrunner build settings, and use mongodb for storage.",
   "main": "index.js",
   "bin": {
