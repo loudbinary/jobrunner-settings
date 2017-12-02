@@ -81,6 +81,15 @@ function Mongodb(){
                 })
             })
         }
+
+        instance.cleanDb = function(){
+            return new Promise((resolve)=>{
+                let collection = instance.db.collection(process.env.JRS_COLLECTION);
+                collection.drop();
+                resolve(null);
+            })
+
+        }
     }
     return instance;
 }

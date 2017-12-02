@@ -60,6 +60,12 @@ function Args(cliArgs){
 
     }
 
+    function clean(){
+        mongo.cleanDb().then(()=>{
+            console.log('Mongodb database has been cleaned, all records deleted!');;
+        })
+
+    }
     function list(){
         if (debug) console.log('Queuing list...');
         mongo.read((err,docs)=>{
@@ -145,6 +151,7 @@ function Args(cliArgs){
                 .command('clone', 'Creates new copy of current build settings from database', clone)
                 .command('push', 'Pushes any changed build settings to database',push)
                 .command('validate', 'Checks build settings directory for any changes', validate)
+                .command('clean', 'Deleted all build settings from Mongodb, DANGEROUS', clean)
                 .command('list', 'Lists all builds',list)
                 .command('seed', 'Reseeds mongodb with your local database, overwriting everything - DANGEROUS',seed)
                 .example('jobrunner-settings --folder ' + process.cwd() + ' refresh','Retrieves current settings from Mongodb and saves to current folder');

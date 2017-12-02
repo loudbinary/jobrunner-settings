@@ -1,11 +1,11 @@
 {
-  "name": "com.loudbinary.jobrunner-settings",
-  "version": "1.0.0",
+  "name": "jobrunner-settings",
+  "version": "1.0.1",
   "description": "Manage jobrunner build settings, and use mongodb for storage.",
   "main": "index.js",
   "bin": {
     "jobrunner-settings": "./bin/jobrunner-settings",
-    "jrs": "./bin/jobrunner-settings.js"
+    "jrs": "./bin/jobrunner-settings"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
