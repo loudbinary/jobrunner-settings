@@ -59,7 +59,7 @@ function Args(cliArgs){
     function clone(){
         if (debug) console.log('Queuing clone...');
         mongo.read((err,docs)=>{
-            utils.localdb.write(jobrunnerDirectory,docs)
+            utils.localdb.write(jobrunnerDirectory,docs);
             console.log('Clone completed');
             process.exit(0);
         });
@@ -163,7 +163,7 @@ function Args(cliArgs){
                 .command('list', 'Lists all builds',list)
                 .command('seed', 'Reseeds mongodb with your local database, overwriting everything - DANGEROUS',seed)
                 .example('jobrunner-settings --folder ' + process.cwd() + ' refresh','Retrieves current settings from Mongodb and saves to current folder');
-            return args.parse(cliArgs,{name: path.parse(process.argv[1]).base});
+            args.parse(cliArgs,{name: path.parse(process.argv[1]).base});
 
         };
         instance = this;
